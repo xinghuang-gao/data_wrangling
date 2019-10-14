@@ -1,17 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Quiz
-
 # In[1]:
 
 
 from bs4 import BeautifulSoup
 import os
 import pandas as pd
-
-
-# In[2]:
 
 
 # List of dictionaries to build file by file and later convert to a DataFrame
@@ -25,9 +20,6 @@ for movie_html in os.listdir(folder):
         num_audience_ratings = soup.find('div', class_='audience-info hidden-xs superPageFontColor')
         num_audience_ratings = num_audience_ratings.find_all('div')[1].contents[2].strip().replace(',','')
         df_list.append({'title': title,'audience_score': int(audience_score),'number_of_audience_ratings': int(num_audience_ratings)})
-
-
-# In[3]:
 
 
 # Append to list of dictionaries
@@ -53,10 +45,10 @@ df.head()
 # In[5]:
 
 
-#df_solution = pd.read_pickle('df_solution.pkl')
-#df.sort_values('title', inplace = True)
-#df.reset_index(inplace = True, drop = True)
-#df_solution.sort_values('title', inplace = True)
-#df_solution.reset_index(inplace = True, drop = True)
-#pd.testing.assert_frame_equal(df, df_solution)
+df_solution = pd.read_pickle('df_solution.pkl')
+df.sort_values('title', inplace = True)
+df.reset_index(inplace = True, drop = True)
+df_solution.sort_values('title', inplace = True)
+df_solution.reset_index(inplace = True, drop = True)
+pd.testing.assert_frame_equal(df, df_solution)
 
